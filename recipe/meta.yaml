@@ -1,47 +1,50 @@
-{% set version = "6.0rc2" %}
+{% set version = "6.0.1" %}
 
 package:
-    name: cdat-lite
-    version: {{ version }}
+  name: cdat-lite
+  version: {{ version }}
 
 source:
-    fn: cdat_lite-{{ version }}.tar.gz
-    url: http://ndg.nerc.ac.uk/dist/cdat_lite-{{ version }}.tar.gz
-    sha256: 6cbfdf9b47fdbc189ca7d2819dafb6cf958116e0f6077b325c375a0ddfab2a95
+  fn: cdat_lite-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/c/cdat-lite/cdat-lite-{{ version }}.tar.gz
+  sha256: 092ae4ff1fb03dee00096e8dd595b769b422759ce972d96525950adf8e1c9374
 
 build:
-    number: 2
-    skip: True  # [win or py3k]
-    script:
-        - export NETCDF_HOME=$PREFIX
-        - export HDF5_HOME=$PREFIX
-        - python setup.py install --single-version-externally-managed --record record.txt
+  number: 0
+  skip: True  # [win or py3k]
+  script:
+    - export NETCDF_HOME=$PREFIX
+    - export HDF5_HOME=$PREFIX
+    - python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
-    build:
-        - python
-        - setuptools
-        - numpy
-        - libnetcdf 4.4.*
-    run:
-        - python
-        - numpy
-        - libnetcdf 4.4.*
+  build:
+    - python
+    - setuptools
+    - numpy x.x
+    - libnetcdf 4.4.*
+  run:
+    - python
+    - setuptools
+    - numpy x.x
+    - libnetcdf 4.4.*
 
 test:
-    commands:
-        - cddump -h
-        - cdscan -h
-    imports:
-        - cdat_lite
-        - cdtime
-        - cdms2
+  imports:
+    - cdat_lite
+    - cdtime
+    - cdms2
+  commands:
+    - cddump -h
+    - cdscan -h
+    #- conda inspect linkages -p $PREFIX cdat-lite  # [not win]
+    #- conda inspect objects -p $PREFIX cdat-lite  # [osx]
 
 about:
-    home: http://proj.badc.rl.ac.uk/cedaservices/wiki/CdatLite
-    summary: A Python package for managing and analysing climate science data
-    license: http://www-pcmdi.llnl.gov/software-portal/cdat/docs/cdat-license
+  home: https://github.com/cedadev/cdat_lite
+  license: http://www-pcmdi.llnl.gov/software-portal/cdat/docs/cdat-license
+  summary: 'A Python package for managing and analysing climate science data.'
 
 extra:
-    recipe-maintainers:
-        - ocefpaf
+  recipe-maintainers:
+    - ocefpaf
