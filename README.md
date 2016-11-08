@@ -3,7 +3,7 @@ About cdat-lite
 
 Home: https://github.com/cedadev/cdat_lite
 
-Package license: http://www-pcmdi.llnl.gov/software-portal/cdat/docs/cdat-license
+Package license: CCLRC
 
 Feedstock license: BSD 3-Clause
 
