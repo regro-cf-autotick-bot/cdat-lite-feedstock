@@ -10,7 +10,7 @@ source:
   sha256: 092ae4ff1fb03dee00096e8dd595b769b422759ce972d96525950adf8e1c9374
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win or py3k]
   script:
     - export NETCDF_HOME=$PREFIX
@@ -42,7 +42,8 @@ test:
 
 about:
   home: https://github.com/cedadev/cdat_lite
-  license: http://www-pcmdi.llnl.gov/software-portal/cdat/docs/cdat-license
+  license: CCLRC
+  license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE'
   summary: 'A Python package for managing and analysing climate science data.'
 
 extra:
