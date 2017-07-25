@@ -10,7 +10,7 @@ source:
   sha256: 092ae4ff1fb03dee00096e8dd595b769b422759ce972d96525950adf8e1c9374
 
 build:
-  number: 2
+  number: 3
   skip: True  # [win or py3k]
   script:
     - export NETCDF_HOME=$PREFIX
@@ -21,12 +21,12 @@ requirements:
   build:
     - python
     - setuptools
-    - numpy x.x
+    - numpy 1.7.*  # [py27]
     - libnetcdf 4.4.*
   run:
     - python
     - setuptools
-    - numpy x.x
+    - numpy >=1.7  # [py27]
     - libnetcdf 4.4.*
 
 test:
