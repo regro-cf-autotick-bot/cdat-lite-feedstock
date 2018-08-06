@@ -9,24 +9,28 @@ source:
   sha256: 092ae4ff1fb03dee00096e8dd595b769b422759ce972d96525950adf8e1c9374
 
 build:
-  number: 4
+  number: 5
   skip: True  # [win or py3k]
   script:
     - export NETCDF_HOME=$PREFIX
     - export HDF5_HOME=$PREFIX
-    - python setup.py install --single-version-externally-managed --record record.txt
+    - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+  host:
     - python
-    - setuptools
-    - numpy 1.11.*
-    - libnetcdf 4.5.*
+    - pip
+    - numpy
+    - libnetcdf
   run:
     - python
     - setuptools
-    - numpy >=1.11
-    - libnetcdf >=4.5
+    - numpy
+    - libnetcdf
 
 test:
   imports:
@@ -36,8 +40,6 @@ test:
   commands:
     - cddump -h
     - cdscan -h
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: https://github.com/cedadev/cdat_lite
